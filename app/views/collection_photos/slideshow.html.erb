@@ -1,0 +1,44 @@
+<h1> Slide show:</h1>
+<%= link_to 'Back to Home', welcome_index_path %>
+
+<style type "text/css">
+.route {  
+    height:  232px;  
+    width:   232px;  
+    padding: 0;  
+    margin:  0;  
+} 
+ 
+.route img {  
+    padding: 15px;  
+    border:  1px solid #ccc;  
+    background-color: #eee;  
+    width:  200px; 
+    height: 200px; 
+    top:  0; 
+    left: 0 
+}
+</style>
+<div align="center">
+<div class="nav"><a id="prev" href="#">Prev</a> <a id="next" href="#">Next</a></div>
+<div class="route"> 
+  <%@route.each do |slide|%>
+  <img src="/sample/<%=slide.name%>" height="200" width="200">
+  <%end%> 
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.route').cycle({
+       fx:     'scrollHorz',
+       prev:   '#prev',
+       next:   '#next',
+       timeout: 0,
+       rev: true
+    });
+  });
+</script>
+
+</div>
+
+

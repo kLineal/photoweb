@@ -1,0 +1,18 @@
+<h1>Index of Photos</h1>
+
+<%= link_to 'Back to Home', welcome_index_path %>
+<br>
+
+<table>
+<% @photos.each do |photo| %>
+<tr>
+    <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
+    <td><%=photo.name%></td>
+    <td></td><td></td>
+    <td><%= link_to 'Show', collection_photo_path(photo) %></td>
+    <td><%= link_to 'Destroy', collection_photo_path(photo),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+</tr>
+    <%end%>
+</table>

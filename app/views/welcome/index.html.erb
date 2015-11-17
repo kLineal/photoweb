@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;	      
+}
+#main {
+    width:350px;
+    float:left;
+    text-align:center;
+    padding:320px;	 	 
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+   padding:5px;	 	 
+}
+</style>
+</head>
+
+<body>
+
+<div id="header">
+<h1>Bienvenido a un SoloOjo  --- El fascinante mundo de Kike</h1>
+</div>
+
+<div id="nav">
+<%= link_to 'Index of Photos', controller: 'collection_photos' %>
+<br><br>
+<%= link_to 'Upload a Photo', new_collection_photo_path %>
+</div>
+
+<div id="main">
+
+</div>
+<div>
+<%= link_to 'All Photos Route', slideshow_collection_photos_path %>
+</div>
+
+<div id="footer">
+This is a footer
+</div>
+</body>
+</html>

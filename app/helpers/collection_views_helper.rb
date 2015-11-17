@@ -1,0 +1,2 @@
+module CollectionViewsHelper
+end
