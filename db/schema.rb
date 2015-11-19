@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117172847) do
+ActiveRecord::Schema.define(version: 20151119165244) do
 
   create_table "collection_photos", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 20151117172847) do
     t.string   "keyword"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "collection_tags_views", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "view_id"
   end
 
   create_table "collection_views", force: :cascade do |t|

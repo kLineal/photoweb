@@ -32,6 +32,12 @@ def create
   
 end
 
+def edit
+  
+  @photo = CollectionPhoto.find(params[:id])
+  @tags = CollectionTag.all
+
+end
 
 def slideshow 
   # There is now #show for collection_views controller.
