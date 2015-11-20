@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+<%= link_to 'Back to Home', welcome_index_path %>
+<h1><center> Index of Keywords </center></h1>
+<br><br>
+
+<div style="width: 100%;overflow:auto;">
+    
+  <div align="left" style="float:left; width: 80%">
+     <%= form_for :collection_tag, url: collection_tags_path do |f| %>
+  <p>
+    <%= f.label :new_keyword %><br>
+    <%= f.text_field :keyword %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+      
+    </div>
+    <div align="right" style="float:right;">
+      
+      <h2>Existing keywords: </h2>
+      <br>
+      <% if @current_keywords.empty? %> No keywords known
+      <% else %>
+        <% @current_keywords.each do |tag| %>
+          <%=tag.keyword %> 
+          <br>
+        <% end %>
+      <% end %>
+    
+</div>
+    
+</body>
+</html>

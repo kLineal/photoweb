@@ -41,7 +41,8 @@ end
 
 def update
 
-  @tags_with = params[:tag_with]
+  @add_tags = params[:tag_with]
+  @photo
 end
 
 def slideshow 

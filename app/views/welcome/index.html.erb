@@ -39,9 +39,15 @@
 </div>
 
 <div id="nav">
-<%= link_to 'Index of Photos', controller: 'collection_photos' %>
-<br><br>
-<%= link_to 'Upload a Photo', new_collection_photo_path %>
+ <h3> Useful links </h3>
+<br>
+<%= link_to 'All Photos', controller: 'collection_photos' %>
+<br>
+<%= link_to 'New Photo', new_collection_photo_path %>
+<br>
+<%= link_to 'All Tags', collection_tags_path %>
+
+
 </div>
 
 <div id="main">

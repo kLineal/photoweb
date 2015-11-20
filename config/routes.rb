@@ -8,11 +8,15 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   root 'welcome#index'
-  resources :collection_views
-  resources :collection_photos do
-    get 'slideshow', on: :collection
-  end
+  resources :collection_views, 
+            :collection_photos do
+              get 'slideshow', on: :collection
+             end
 
+  
+  get  'collection_tags/' => 'collection_tags#index'
+  post 'collection_tags/' => 'collection_tags#create'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
