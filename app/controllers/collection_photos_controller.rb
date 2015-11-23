@@ -41,7 +41,23 @@ end
 
 def update
 
-  @tags_with = params[:tag_with]
+  # get editting collection_photo 
+  photo = CollectionPhoto.find(params[:id])
+  
+  # find collection_tags with ids in :tag_with
+  tags = CollectionTag.find(params[:tag_with])
+  
+  # get keywords and add tag 'photo' with them
+  if !tags.empty?
+
+    keywords_to_append = []
+    tags.each { |tag| keywords_to_append << tag.keyword }
+    
+    # tag with keywords
+    photo.keyword_list.add(keywords_to_append)
+  end
+    
+  redirect_to edit_collection_photo_path(photo)
 end
 
 def slideshow 
@@ -63,9 +79,12 @@ end
 
 private
 
-def photo_params #whitelists attribute 'name' of CollectionPhoto model
+def photo_params 
+# whitelists attributes
+# 'name' CollectionPhoto model
+# 'tag_list' of Tag model
   
-  params.require(:collection_photo).permit(:name)
+  params.require(:collection_photo).permit(:name, :tag_list)
   
 end
 
