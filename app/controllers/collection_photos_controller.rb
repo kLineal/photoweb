@@ -39,24 +39,33 @@ def edit
 
 end
 
+# either tag params[:id] with collection_tags 
+# whose ids are given in params[:tag_with_ids]
+#
+# or delete tags from params[:id] whose
+# names are given in params[:delete_tag_names]
+
 def update
 
-  # get editting collection_photo 
   photo = CollectionPhoto.find(params[:id])
   
-  # find collection_tags with ids in :tag_with
-  tags = CollectionTag.find(params[:tag_with])
+  if params[:delete_tags_names]
+    photo.keyword_list.remove(params[:delete_tags_names])
+    photo.save
+  end
   
-  # get keywords and add tag 'photo' with them
-  if !tags.empty?
-
+  if params[:tag_with_ids]
+  
+    tags = CollectionTag.find(params[:tag_with_ids])
     keywords_to_append = []
     tags.each { |tag| keywords_to_append << tag.keyword }
-    
-    # tag with keywords
+      
     photo.keyword_list.add(keywords_to_append)
+    photo.save
+  
   end
-    
+  
+  
   redirect_to edit_collection_photo_path(photo)
 end
 

@@ -1,64 +1,89 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+<style>
+.column-left{ float: left; width: 33%; }
+.column-right{ float: right; width: 33%; }
+.column-center{ display: inline-block; width: 33%; }
+
+</style>
+</head>
+
+
 <body>
 
 <h1><center> Edit photo <%= @photo.name%> </center></h1>
 <%= link_to 'Back to Home', welcome_index_path %>
-
 <br><br>
 
-<div style="width: 100%;overflow:auto;">
-    <div align="rigth" style="float:left; width: 80%">
-      <img src="/sample/<%=@photo.name%>", WIDTH=20%, HEIGHT=20%>
+  <div class="edit">
+ 
+     <div class="column-center">
+        Tagged with:
+       <br><br>
       
-      <h2> Tags: </h2>
+         <% if !@photo.keywords.any? %>  No tags
+         <% else %> 
+	   <%= form_for @photo, url: collection_photo_path(@photo), method: :patch  do |f| %> 
+              <% @photo.keywords.each do |tag| %>
+	         <li>
+		 <%= tag.name %>
+		 (
+		 <%= check_box_tag 'delete_tags_names[]', tag.name -%>
+		 ) 
+		 </li>  
+		 <br>
+              <% end %>
+	   <%= f.submit "Delete selected tags" %>
+         <% end %>
+       <% end %>
+   
+     </div>
+   
+     <div class="column-left">
+       
+       <img src="/sample/<%=@photo.name%>", WIDTH=50%, HEIGHT=50%>
+       <br><br>
+       <%= form_for @photo, url: collection_photo_path(@photo), method: :patch  do |f| %> 
+        <%= f.label :name  %>
+        <%= f.text_field :name %>
+	<br>
+	<%= f.submit "Change name" %>
+       <% end %>
+     </div>
+   
+     <div class="column-right">
+       Add tags from: 
+       <br><br>
+       <% if @available_tags.empty? %> No keywords known
+       
+       <% else %>
       
-      <% if !@photo.keywords.any? %>  No tags
-      <% else %> 
-        <% @photo.keywords.each do |tag| %>
-           <%= tag.name %> 
-	   <br>
-        <% end %>
-      <% end  %>
-      
-    </div>
-    <div align="left" style="float:right;">
-      
-      <h2>Select tags from: </h2>
-      <br>
-      <% if @available_tags.empty? %> No keywords known
-      
-      <% else %>   
+         <%= form_for @photo, url: collection_photo_path(@photo), method: :patch  do |f| %> 
+          <% @available_tags.each do |tag| %>
+	      <li>
+		<%= check_box_tag 'tag_with_ids[]', tag.id -%>
+		<%= tag.keyword -%>
+	      </li>
+	      <% end %>
+	      
+	      <%= f.submit "Add selected tags" %>
+       
+          <% end %>  
+         
+	 <% end %>
+     </div>
+     
+ </div>
 
-         <%= form_for @photo, url: collection_photo_path(@photo), method: :patch  do |f| %>
 
-      <p>
-	  <%= f.label :name %><br>
-	  <%= f.text_field :name %>
-	  
-	  <% @available_tags.each do |tag| %>
-	  <li>
-	    <%= check_box_tag 'tag_with[]', tag.id -%>
-	    <%= h tag.keyword -%>
-	  </li>
-	  <% end %>
-      </p>
-      
-      <p>
-	<%= f.submit %>
-      </p>
-      <% end %>
-      
-      <!--
-	  <% @available_tags.each do |tag| %>
-      <li>
-        <%= check_box_tag 'tag_with[]', tag.id -%>
-        <%= h tag.keyword -%>
-      </li>
-      <% end %>
-      !-->
-      <% end %>
-    </div>
-    
+<!--
+<div id="submit">
+ Here the submit button
+</div>  
+!-->
+
+
 </body>
 </html>
