@@ -15,3 +15,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore backup files
+*~
+
+# Ignore test view 
+app/views/collection_photos/update.html.erb
