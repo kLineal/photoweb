@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20151119165244) do
   end
 
   create_table "collection_tags_views", id: false, force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "view_id"
+    t.integer "collection_tag_id"
+    t.integer "collection_view_id"
   end
 
   create_table "collection_views", force: :cascade do |t|

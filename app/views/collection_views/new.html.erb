@@ -1,0 +1,11 @@
+<%= link_to 'Back to Home', welcome_index_path %>
+<%= form_for :collection_view, url: collection_views_path do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.submit "New view" %>
+  </p>
+<% end %>

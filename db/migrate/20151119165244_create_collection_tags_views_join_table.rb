@@ -6,8 +6,8 @@ class CreateCollectionTagsViewsJoinTable < ActiveRecord::Migration
 
   def change
     create_table :collection_tags_views, id: false do |t|
-      t.integer :tag_id
-      t.integer :view_id
+      t.integer :collection_tag_id
+      t.integer :collection_view_id
     end
   end
 

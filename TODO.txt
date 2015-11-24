@@ -4,5 +4,5 @@
 ##########################################
 
 
-- Handle empty :tagged_with in CollectionPhotosController#update 
+- CollectionPohotosController#edit: handle change of name (name of jpg?) 
 
