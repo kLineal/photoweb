@@ -7,14 +7,14 @@ def index
   @views = CollectionView.all
 end
 
+#GET /collection_views/new
 def new
 
+#collapse to index
+#redirect_to collection_views_path
+
 end
 
-# GET /collection_views/:id
-def show
-  
-end
 
 # POST /collection_views
 def create
@@ -22,13 +22,15 @@ def create
   view = CollectionView.new(view_params)
   view.save
   redirect_to collection_views_path 
+
 end
  
 
 # GET collection_views/:id/edit 
 def edit
 
-  @view = this_view
+  @TYPES = CollectionView.view_types
+  @view = set_view
   @tags = @view.collection_tags
   @available_tags = CollectionTag.all
   
@@ -37,12 +39,21 @@ end
 # PATCH/PUT collection_views/:id/edit
 def update
 
+
+this_view = set_view
+
 # three separate actions:
   
-  if params[:add_tags_ids] 
+  if params[:add_tags_ids]   
     
     tags_to_append = CollectionTag.find(params[:add_tags_ids]) 
-    tags_to_append.each { |tag| this_view.collection_tags<< tag}
+    tags_to_append.each do |tag|
+      
+      if !this_view.collection_tags.exists?(tag.id)
+      this_view.collection_tags<< tag
+      end 
+    
+    end
     
   end
   
@@ -51,37 +62,56 @@ def update
     tags_to_delete = this_view.collection_tags.find(params[:delete_tags_ids])
     
     tags_to_delete.each { |tag| this_view.collection_tags.destroy(tag) }
-
-  else
     
-  
+  end
+
+  if params[:collection_view] # else sets the type of the view
+    
+      
+    this_view.name = params[:collection_view][:name]  
+   
+    if params[:view_type] 
+      this_view.view_type = params[:view_type] 
+    end  
+
+    this_view.save!
+    
   end
   
   redirect_to edit_collection_view_path(this_view)
-  
+  #render plain: params.inspect
 end
 
 # GET collection_views/:id
 def show
- # TODO: let @view given by id in params, 
- # then generate array @photos based on the 
- # owned taggings of @view.
- # Use view of current collection_photos#slideshow. 
- @view = CollectionPhoto.all
+ 
+ @this_view = set_view
+ 
+ keywords = []
+ @this_view.collection_tags.each {  |tag| keywords<< tag.keyword }
+ 
+ @photos = CollectionPhoto.tagged_with(keywords, :on => :keywords, :any => true)
+  
+  #render plain: @photos.each {|photo| puts photo.name}
+  #render plain: keywords.inspect
+end
+
+
+def destroy
+
 end
 
 private
 
-def view_params 
 # whitelists attributes
-# 'name' CollectionView model
+def view_params 
   
-  params.require(:collection_view).permit(:name)
+  params.require(:collection_view).permit(:name,:type_view)
   
 end
 
-# callback to all actions in the controller
-def this_view
+# callbacks for shared resources across actions
+def set_view
   CollectionView.find(params[:id])
 end
 

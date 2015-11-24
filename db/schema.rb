@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20151119165244) do
 
   create_table "collection_views", force: :cascade do |t|
     t.string   "name"
+    t.string   "view_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

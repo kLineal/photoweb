@@ -62,6 +62,7 @@ def update
       
     photo.keyword_list.add(keywords_to_append)
     photo.save
+    photo.reload
   
   end
   

@@ -13,8 +13,8 @@
 
 <body>
 
-<h1><center> Edit:<%= @view.name%> </center></h1>
-<%= link_to 'Back to Home', welcome_index_path %>
+<h1><center> Edit: <%= @view.name%> </center></h1>
+<%= link_to 'Index of Views', collection_views_path %>
 <br><br>
 
   <div class="edit">
@@ -43,10 +43,22 @@
    
      <div class="column-left">
        <%= form_for @view, url: collection_view_path(@view), method: :patch  do |f| %> 
-        <%= f.label :name  %>
+        
+       <%= f.label :name  %>
         <%= f.text_field :name %>
+	<br><br>
+	
+	<%= f.label :view_type  %>
+        <%= f.text_field :view_type %>
 	<br>
-	<%= f.submit "Change name" %>
+	<% @TYPES.each do |type| %>
+	  <%= radio_button_tag 'view_type', type %>
+	  <%=type %>
+	  <br>
+	<% end %>
+	
+	<br>
+	<%= f.submit "Save" %>
        <% end %>
      </div>
    

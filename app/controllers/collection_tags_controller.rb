@@ -1,5 +1,6 @@
 class CollectionTagsController < ApplicationController
 
+# GET /collection_tags
 def index 
 @current_keywords = CollectionTag.all
 end
@@ -18,7 +19,8 @@ end
 
 private
 
-def tag_params #whitelists attribute 'keyword' of CollectionTag model
+#whitelists attribute 'keyword' of CollectionTag
+def tag_params 
   
   params.require(:collection_tag).permit(:keyword)
   
