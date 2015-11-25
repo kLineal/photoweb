@@ -12,10 +12,25 @@ end
 
 def index
   
-    @photos = CollectionPhoto.all
+  @all_tags = CollectionTag.all
+  @ftags = []
+  
+  # show only photos filtered by tags,
+  # and make the filter available to the view
+  if params[:filter_by_tags_ids]
     
+    params[:filter_by_tags_ids].each { |id| @ftags << id.to_i  }
+    
+    keywords = get_keywords(params[:filter_by_tags_ids])
+    
+    @photos = CollectionPhoto.tagged_with(keywords, :on => :keywords, :math_all => true)
+    
+  else @photos = CollectionPhoto.all  
   end
 
+end
+
+  
 def show
     
     @photo = CollectionPhoto.find(params[:id])
@@ -43,40 +58,33 @@ end
 # whose ids are given in params[:tag_with_ids]
 #
 # or delete tags from params[:id] whose
-# names are given in params[:delete_tag_names]
+# names are given in params[:delete_tag_ids]
 
 def update
 
   photo = CollectionPhoto.find(params[:id])
   
-  if params[:delete_tags_names]
-    photo.keyword_list.remove(params[:delete_tags_names])
-    photo.save
+  # first remove then add (removing and adding a tag untouches it)
+  if params[:delete_tags_ids]
+    
+    keywords = get_keywords(params[:delete_tags_ids])
+    photo.keyword_list.remove(keywords)
+      
   end
   
   if params[:tag_with_ids]
   
-    tags = CollectionTag.find(params[:tag_with_ids])
-    keywords_to_append = []
-    tags.each { |tag| keywords_to_append << tag.keyword }
-      
-    photo.keyword_list.add(keywords_to_append)
-    photo.save
-    photo.reload
-  
+    keywords = get_keywords(params[:tag_with_ids])
+    photo.keyword_list.add(keywords)
+ 
   end
   
-  
+  photo.save
+  photo.reload
   redirect_to edit_collection_photo_path(photo)
+
 end
 
-def slideshow 
-  # There is now #show for collection_views controller.
-  # Delete this action and its view (and the route in config/routes)
-  # when appropriate.
-  @route = CollectionPhoto.all
-  
-end
 
 def destroy
   
@@ -98,4 +106,11 @@ def photo_params
   
 end
 
+
+def get_keywords ids
+  tags = CollectionTag.find(ids)
+  keywords = []
+  tags.each { |tag| keywords << tag.keyword }
+  keywords
+end
 end

@@ -1,19 +1,76 @@
-<h1>Index of Photos</h1>
+<head>
+<style>
+.column-left{ float: left; width: 60%; }
+.column-right{ float: right; width: 40%; }
+</style>
+</head>
 
-<%= link_to 'Back to Home', welcome_index_path %>
-<br>
+<body>
+  <h1>Index of Photos</h1>
+  
+  <%= link_to 'Back to Home', welcome_index_path %>
+  <br>
+  
+  <div class="wrapper">
+    
+    <div class="column-left">
+      
+      <table>
+	
+	<% @photos.each do |photo| %>
+	
+	<tr>
+	  <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
+	  <td><%=photo.name%></td>
+	  <td></td><td></td>
+	  <td><%= link_to 'Show', collection_photo_path(photo) %></td>
+	  <td><%= link_to 'Edit', edit_collection_photo_path(photo)%></td>
+	  <td><%= link_to 'Destroy', collection_photo_path(photo),
+		  method: :delete,
+		  data: { confirm: 'Are you sure?' } %></td>
+	  
+	  <td>Keywords:
+	    <% if !photo.keywords.any?%> 
+	       none
+	    
+	    <% else %>
+	      
+	      <% photo.keywords.each do |keyword| %>
+	      
+	        <%= keyword.name %>
+		
+	      <% end %>
+	    <% end %>
+	  </td>
+	
+	
+	  
+	
+	</tr>
+	
+	<% end %>
+	
+      </table>
+      
+    </div>
+    
+    <div class="column-right">
+      
+      <%= form_tag("/collection_photos", method: "GET") do %>
+      
+         <% @all_tags.each do |tag| %>
+	   <%= check_box_tag 'filter_by_tags_ids[]', tag.id, @ftags.include?(tag.id)%>
+	    <%= tag.keyword %>
+	    <br>
+	   
+	   <% end %>
+       
+	   <%= submit_tag "filter by keywords (match all)" %>
+      
+	   <% end %>
+      
+    </div>
+    
+  </div>
 
-<table>
-<% @photos.each do |photo| %>
-<tr>
-    <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
-    <td><%=photo.name%></td>
-    <td></td><td></td>
-    <td><%= link_to 'Show', collection_photo_path(photo) %></td>
-    <td><%= link_to 'Edit', edit_collection_photo_path(photo)%></td>
-    <td><%= link_to 'Destroy', collection_photo_path(photo),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-</tr>
-    <%end%>
-</table>
+</body>

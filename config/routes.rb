@@ -8,10 +8,9 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   root 'welcome#index'
+  
   resources :collection_views, 
-            :collection_photos do
-              get 'slideshow', on: :collection
-             end
+            :collection_photos 
 
   
   get  'collection_tags/' => 'collection_tags#index'

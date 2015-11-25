@@ -1,6 +1,6 @@
 class CollectionViewsController < ApplicationController
 
-# Each collection_view shows collection_photos tagged under associated collection_tags
+# Each view shows photos tagged under associated tags
 
 def index
 

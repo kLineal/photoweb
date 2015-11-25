@@ -27,10 +27,11 @@
          <% else %> 
 	   <%= form_for @photo, url: collection_photo_path(@photo), method: :patch  do |f| %> 
               <% @photo.keywords.each do |tag| %>
+	         
 	         <li>
 		 <%= tag.name %>
 		 (
-		 <%= check_box_tag 'delete_tags_names[]', tag.name -%>
+		 <%= check_box_tag 'delete_tags_ids[]', tag.id -%>
 		 ) 
 		 </li>  
 		 <br>
