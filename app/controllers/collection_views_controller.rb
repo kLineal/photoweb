@@ -39,7 +39,6 @@ end
 # PATCH/PUT collection_views/:id/edit
 def update
 
-
 this_view = set_view
 
 # three separate actions:
@@ -71,6 +70,7 @@ this_view = set_view
     this_view.name = params[:collection_view][:name]  
    
     if params[:view_type] 
+
       this_view.view_type = params[:view_type] 
     end  
 
@@ -79,7 +79,8 @@ this_view = set_view
   end
   
   redirect_to edit_collection_view_path(this_view)
-  #render plain: params.inspect
+ 
+#render plain: params.inspect
 end
 
 # GET collection_views/:id

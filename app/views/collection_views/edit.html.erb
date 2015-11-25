@@ -17,6 +17,7 @@
 <%= link_to 'Index of Views', collection_views_path %>
 <br><br>
 
+<%= form_for @view, url: collection_view_path(@view), method: :patch  do |f| %>
   <div class="edit">
  
      <div class="column-center">
@@ -25,24 +26,23 @@
       
          <% if @tags.empty? %>  No associated tags
          <% else %> 
-	   <%= form_for @view, url: collection_view_path(@view), method: :patch  do |f| %> 
+	   
               <% @tags.each do |tag| %>
 	         <li>
 		 <%= tag.keyword %>
-		 (
+		 (delete?
 		 <%= check_box_tag 'delete_tags_ids[]', tag.id -%>
 		 ) 
 		 </li>  
 		 <br>
               <% end %>
-	   <%= f.submit "Delete selected tags" %>
-         <% end %>
+	  
        <% end %>
    
      </div>
    
      <div class="column-left">
-       <%= form_for @view, url: collection_view_path(@view), method: :patch  do |f| %> 
+        
         
        <%= f.label :name  %>
         <%= f.text_field :name %>
@@ -58,8 +58,8 @@
 	<% end %>
 	
 	<br>
-	<%= f.submit "Save" %>
-       <% end %>
+	
+       
      </div>
    
      <div class="column-right">
@@ -69,23 +69,22 @@
        
        <% else %>
       
-         <%= form_for @view, url: collection_view_path(@view), method: :patch  do |f| %> 
+          
           <% @available_tags.each do |tag| %>
 	      <li>
 		<%= check_box_tag 'add_tags_ids[]', tag.id -%>
 		<%= tag.keyword -%>
 	      </li>
-	      <% end %>
-	      
-	      <%= f.submit "Add tags to view" %>
-       
-          <% end %>  
+	      <% end %> 
          
 	 <% end %>
      </div>
      
  </div>
-
+<div class="submit">
+<%= f.submit "Edit view"%>
+</div>
+<% end %>
 
 </body>
 </html>
