@@ -1,4 +1,4 @@
-class CollectionPhotosController < ApplicationController
+class Admin::CollectionPhotosController < ApplicationController
 
 # Uses tags to generate partial and covering (disjoint) views of 
 # the collection.
@@ -10,6 +10,7 @@ def new
 
 end
 
+# GET 'admin/collection_photos'
 def index
   
   @all_tags = CollectionTag.all
@@ -30,23 +31,26 @@ def index
 
 end
 
-  
+
+# 'GET admin/collection_photos/:id'
 def show
     
     @photo = CollectionPhoto.find(params[:id])
     
 end
 
+# 'POST ''admin/collection_photos'
 def create
     
   @photo = CollectionPhoto.new(photo_params)
   
   @photo.save
   
-  redirect_to @photo
+  redirect_to admin_collection_photo(@photo)
   
 end
 
+# GET 'admin/collection_photos/:id/edit'
 def edit
   
   @photo = CollectionPhoto.find(params[:id])
@@ -54,12 +58,13 @@ def edit
 
 end
 
+# PATCH/PUT 'admin/collection_photos/:id'
+#
 # either tag params[:id] with collection_tags 
 # whose ids are given in params[:tag_with_ids]
 #
 # or delete tags from params[:id] whose
 # names are given in params[:delete_tag_ids]
-
 def update
 
   photo = CollectionPhoto.find(params[:id])
@@ -81,17 +86,18 @@ def update
   
   photo.save
   photo.reload
-  redirect_to edit_collection_photo_path(photo)
+  redirect_to edit_admin_collection_photo_path(photo)
 
 end
 
 
+# DELETE 'admin/collection_photos/:id'
 def destroy
   
-  @photo=CollectionPhoto.find(params[:id])
-  @photo.destroy
-  redirect_to collection_photos_path
-  
+  #@photo=CollectionPhoto.find(params[:id])
+  #@photo.destroy
+  #redirect_to collection_photos_path
+  render plain: "action to be implemented"
 end
 
 

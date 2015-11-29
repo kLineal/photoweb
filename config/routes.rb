@@ -9,12 +9,22 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   
-  resources :collection_views, 
-            :collection_photos 
-
+  # administrative resources and routes
+     
+    #resources :collection_views 
+    #:collection_photos 
+    
+    #get  'collection_tags/' => 'collection_tags#index'
+    #post 'collection_tags/' => 'collection_tags#create'
   
-  get  'collection_tags/' => 'collection_tags#index'
-  post 'collection_tags/' => 'collection_tags#create'
+  namespace :admin do
+    resources :collection_photos, 
+              :collection_views
+    
+    get  'collection_tags/' => 'collection_tags#index'
+    post 'collection_tags/' => 'collection_tags#create'
+  end
+  
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

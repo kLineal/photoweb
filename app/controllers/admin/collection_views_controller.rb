@@ -1,13 +1,13 @@
-class CollectionViewsController < ApplicationController
+class Admin::CollectionViewsController < ApplicationController
 
 # Each view shows photos tagged under associated tags
 
+# GET 'admin/collection_views'
 def index
-
   @views = CollectionView.all
 end
 
-#GET /collection_views/new
+#GET '/admin/collection_views/new'
 def new
 
 #collapse to index
@@ -15,18 +15,17 @@ def new
 
 end
 
-
-# POST /collection_views
+# POST '/admin/collection_views'
 def create
 
   view = CollectionView.new(view_params)
   view.save
-  redirect_to collection_views_path 
+  redirect_to admin_collection_views_path 
 
 end
  
 
-# GET collection_views/:id/edit 
+# GET admin/collection_views/:id/edit 
 def edit
 
   @TYPES = CollectionView.view_types
@@ -36,7 +35,7 @@ def edit
   
 end
 
-# PATCH/PUT collection_views/:id/edit
+# PATCH/PUT 'admin/collection_views/:id/edit'
 def update
 
 this_view = set_view
@@ -46,12 +45,11 @@ this_view = set_view
   if params[:add_tags_ids]   
     
     tags_to_append = CollectionTag.find(params[:add_tags_ids]) 
-    tags_to_append.each do |tag|
-      
+    
+    tags_to_append.each do |tag|  
       if !this_view.collection_tags.exists?(tag.id)
       this_view.collection_tags<< tag
       end 
-    
     end
     
   end
@@ -78,12 +76,12 @@ this_view = set_view
     
   end
   
-  redirect_to edit_collection_view_path(this_view)
+  redirect_to edit_admin_collection_view_path(this_view)
  
 #render plain: params.inspect
 end
 
-# GET collection_views/:id
+# GET 'admin/collection_views/:id'
 def show
  
  @this_view = set_view
@@ -99,7 +97,7 @@ end
 
 
 def destroy
-
+render plain: "action to be implemented"
 end
 
 private

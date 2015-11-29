@@ -10,9 +10,9 @@
     
     <td><%=view.name%></td>
     <td></td><td></td>
-    <td><%= link_to 'Show', collection_view_path(view) %></td>
-    <td><%= link_to 'Edit', edit_collection_view_path(view)%></td>
-    <td><%= link_to 'Destroy', collection_view_path(view),
+    <td><%= link_to 'Show', admin_collection_view_path(view) %></td>
+    <td><%= link_to 'Edit', edit_admin_collection_view_path(view)%></td>
+    <td><%= link_to 'Destroy', admin_collection_view_path(view),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
 </tr>

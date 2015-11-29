@@ -23,9 +23,9 @@
 	  <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
 	  <td><%=photo.name%></td>
 	  <td></td><td></td>
-	  <td><%= link_to 'Show', collection_photo_path(photo) %></td>
-	  <td><%= link_to 'Edit', edit_collection_photo_path(photo)%></td>
-	  <td><%= link_to 'Destroy', collection_photo_path(photo),
+	  <td><%= link_to 'Show', admin_collection_photo_path(photo) %></td>
+	  <td><%= link_to 'Edit', edit_admin_collection_photo_path(photo)%></td>
+	  <td><%= link_to 'Destroy', admin_collection_photo_path(photo),
 		  method: :delete,
 		  data: { confirm: 'Are you sure?' } %></td>
 	  
@@ -56,7 +56,7 @@
     
     <div class="column-right">
       
-      <%= form_tag("/collection_photos", method: "GET") do %>
+      <%= form_tag(admin_collection_photos_path, method: "GET") do %>
       
          <% @all_tags.each do |tag| %>
 	   <%= check_box_tag 'filter_by_tags_ids[]', tag.id, @ftags.include?(tag.id)%>
