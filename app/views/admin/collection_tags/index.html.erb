@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html>
 <body>
-<%= link_to 'Back to Home', welcome_index_path %>
-<h1><center> Index of Keywords </center></h1>
+<%= link_to 'Vuelta a Admin', admin_root_path %>
+<h1><center> Indice the Keywords </center></h1>
 <br><br>
 
 <div style="width: 100%;overflow:auto;">
@@ -15,16 +13,16 @@
   </p>
  
   <p>
-    <%= f.submit "Create tag" %>
+    <%= f.submit "Crear keyword" %>
   </p>
 <% end %>
       
     </div>
     <div align="right" style="float:right;">
       
-      <h2>Existing keywords: </h2>
+      <h2> Keywords existentes: </h2>
       <br>
-      <% if @current_keywords.empty? %> No keywords known
+      <% if @current_keywords.empty? %> Ninguno
       <% else %>
         <% @current_keywords.each do |tag| %>
           <%=tag.keyword %> 
@@ -35,4 +33,4 @@
 </div>
     
 </body>
-</html>
+

@@ -1,0 +1,29 @@
+<body>
+
+<div id="header", align="center">
+<h1>Bienvenido a Admin Kike!</h1>
+</div>
+<br><br>
+
+<div id="main">
+ 
+<h2> Collection Photos: </h2>
+<br>
+<%= link_to 'Todas la fotos', controller: 'admin/collection_photos' %>
+<br>
+<%= link_to 'Nueva foto', new_admin_collection_photo_path %>
+
+<br> <br>
+<h2> Collection Tags: </h2>
+<%= link_to 'Manipular y mostrar tags', admin_collection_tags_path %>
+
+<br> <br>
+<h2> Collection Views: </h2>
+<br>
+<%= link_to 'Todas las vistas', admin_collection_views_path %>
+<br>
+<%= link_to 'Nueva Vista', new_admin_collection_view_path %>
+
+</div>
+
+</body>

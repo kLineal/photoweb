@@ -6,9 +6,9 @@
 </head>
 
 <body>
-  <h1>Index of Photos</h1>
+  <h1>Archivo de Fotos</h1>
   
-  <%= link_to 'Back to Home', welcome_index_path %>
+  <%= link_to 'Vueta a Admin', admin_root_path %>
   <br>
   
   <div class="wrapper">
@@ -23,15 +23,15 @@
 	  <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
 	  <td><%=photo.name%></td>
 	  <td></td><td></td>
-	  <td><%= link_to 'Show', admin_collection_photo_path(photo) %></td>
-	  <td><%= link_to 'Edit', edit_admin_collection_photo_path(photo)%></td>
-	  <td><%= link_to 'Destroy', admin_collection_photo_path(photo),
+	  <td><%= link_to 'Mostrar', admin_collection_photo_path(photo) %></td>
+	  <td><%= link_to 'Editar', edit_admin_collection_photo_path(photo)%></td>
+	  <td><%= link_to 'Destruir', admin_collection_photo_path(photo),
 		  method: :delete,
 		  data: { confirm: 'Are you sure?' } %></td>
 	  
 	  <td>Keywords:
 	    <% if !photo.keywords.any?%> 
-	       none
+	       ninguno
 	    
 	    <% else %>
 	      
@@ -65,7 +65,7 @@
 	   
 	   <% end %>
        
-	   <%= submit_tag "filter by keywords (match all)" %>
+	   <%= submit_tag "filtrar por keywords (match all)" %>
       
 	   <% end %>
       

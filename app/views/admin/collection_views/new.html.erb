@@ -1,11 +1,15 @@
-<%= link_to 'Back to Home', welcome_index_path %>
-<%= form_for :collection_view, url: collection_views_path do |f| %>
+<body>
+
+<%= link_to 'Vuelta a Admin', admin_root_path %>
+<%= form_for :collection_view, url: admin_collection_views_path do |f| %>
   <p>
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </p>
  
   <p>
-    <%= f.submit "New view" %>
+    <%= f.submit "Crear vista" %>
   </p>
 <% end %>
+
+</body>

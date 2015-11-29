@@ -1,6 +1,8 @@
-<%= link_to 'Back to Home', welcome_index_path %>
+<body>
+
+<%= link_to 'Vuelta a Admin', admin_root_path %>
 <br>
-<h1><center>Index of Views</center></h1>
+<h1><center>Indice de Vistas</center></h1>
 
 <br>
 
@@ -10,11 +12,13 @@
     
     <td><%=view.name%></td>
     <td></td><td></td>
-    <td><%= link_to 'Show', admin_collection_view_path(view) %></td>
-    <td><%= link_to 'Edit', edit_admin_collection_view_path(view)%></td>
-    <td><%= link_to 'Destroy', admin_collection_view_path(view),
+    <td><%= link_to 'Mostrar', admin_collection_view_path(view) %></td>
+    <td><%= link_to 'Editar', edit_admin_collection_view_path(view)%></td>
+    <td><%= link_to 'Destruir', admin_collection_view_path(view),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+              data: { confirm: 'Estas seguro?' } %></td>
 </tr>
     <%end%>
 </table>
+
+</body>

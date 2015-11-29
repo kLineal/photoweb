@@ -10,14 +10,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
   
   # administrative resources and routes
-     
-    #resources :collection_views 
-    #:collection_photos 
-    
-    #get  'collection_tags/' => 'collection_tags#index'
-    #post 'collection_tags/' => 'collection_tags#create'
-  
   namespace :admin do
+    
+    root 'welcome#index'
     resources :collection_photos, 
               :collection_views
     
