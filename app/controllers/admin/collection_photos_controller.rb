@@ -1,10 +1,8 @@
 class Admin::CollectionPhotosController < ApplicationController
 
-# Uses tags to generate partial and covering (disjoint) views of 
+# Photos are tagged with keywords (from collection_tags table) 
+# This allows to render partial and disjoint (covers) views of 
 # the collection.
-#
-# The list of keywords are those from model CollectionTag
-#
 
 def new 
 
@@ -60,11 +58,8 @@ end
 
 # PATCH/PUT 'admin/collection_photos/:id'
 #
-# either tag params[:id] with collection_tags 
-# whose ids are given in params[:tag_with_ids]
-#
-# or delete tags from params[:id] whose
-# names are given in params[:delete_tag_ids]
+# tag (and/or delete) params[:id] with collection_tags 
+# whose ids are given in params[:tag_with_ids] ( or in params[:delete_tag_ids])
 def update
 
   photo = CollectionPhoto.find(params[:id])
