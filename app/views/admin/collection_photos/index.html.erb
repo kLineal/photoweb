@@ -1,7 +1,12 @@
 <head>
 <style>
-.column-left{ float: left; width: 60%; }
-.column-right{ float: right; width: 40%; }
+#black {height:600px;width:500px;border:2px solid #000000;}
+#black div{height:80px;width:150px;margin-top:20px;}
+
+#index_photos{border:2px solid #009900;float:left;margin-right:10px}
+#filter_by{border: 2px solid #0000FF;width:30%;float:right}
+#tag_with{border: 2px solid #FF0000;width:30%;margin-top:10px;float:right;clear:right}<!-- clear filter_by on the right !-->
+</style>
 </style>
 </head>
 
@@ -9,11 +14,11 @@
   <h1>Archivo de Fotos</h1>
   
   <%= link_to 'Vueta a Admin', admin_root_path %>
-  <br>
+  <br><br>
   
   <div class="wrapper">
     
-    <div class="column-left">
+    <div id="index_photos">
       
       <table>
 	
@@ -42,8 +47,6 @@
 	      <% end %>
 	    <% end %>
 	  </td>
-	
-	
 	  
 	
 	</tr>
@@ -53,8 +56,8 @@
       </table>
       
     </div>
-    
-    <div class="column-right">
+   
+    <div id="filter_by">
       
       <%= form_tag(admin_collection_photos_path, method: "GET") do %>
       
@@ -69,6 +72,10 @@
       
 	   <% end %>
       
+    </div>
+    
+    <div id="tag_with">
+      Add tags from:
     </div>
     
   </div>
