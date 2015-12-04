@@ -89,7 +89,7 @@ def show
  keywords = []
  @this_view.collection_tags.each {  |tag| keywords<< tag.keyword }
  
- @photos = CollectionPhoto.tagged_with(keywords, :on => :keywords, :any => true)
+ @photos = CollectionPhoto.tagged_with(keywords, :on => :keywords, :match_all => true)
   
   #render plain: @photos.each {|photo| puts photo.name}
   #render plain: keywords.inspect
