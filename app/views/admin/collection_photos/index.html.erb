@@ -1,7 +1,6 @@
 <head>
 <style>
 
-
 #index_photos{
               border:2px solid #009900;
               float:left;
@@ -18,11 +17,19 @@
            float:right;
            overflow-y:scroll;
 }
+
+#submit_filter{
+               border: 2px solid #FF0000; 
+               position: absoute;
+               
+               clear:both <!-- clear  !-->
+}
+
 #submit_edit_batch{
             border: 2px solid #FF0000; 
             margin-bottom:10px;
             float:left;
-            clear:both <!-- clear filter_by on the right !-->
+            clear:both <!-- clear  !-->
 }
 
 </style>
@@ -91,6 +98,7 @@
 
     <div id="filter_by">
       <h4>Mostrando filtradas por keywords:</h4>
+
       <%= form_tag(admin_collection_photos_path, method: "GET") do %>
       
          <% @all_collection_tags.each do |tag| %>
@@ -98,11 +106,11 @@
 	     <%= check_box_tag 'filter_by_keywords[]', tag.keyword, @filter.include?(tag.keyword)%>
 	    <%= tag.keyword %>
 	  </ul> 
-	   <% end %>
-       
-	   <%= submit_tag "filtrar (any)" %>
+	 <% end %>
       
-	   <% end %>
+	 <%= submit_tag "filtrar (any)" %>
+
+      <% end %>
       
     </div>
 
