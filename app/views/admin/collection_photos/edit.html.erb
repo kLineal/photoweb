@@ -26,12 +26,12 @@
          <% if !@photo.keywords.any? %>  No tags
          <% else %> 
 	   <%= form_for @photo, url: admin_collection_photo_path(@photo), method: :patch  do |f| %> 
-              <% @photo.keywords.each do |tag| %>
+              <% @photo.keywords.each do |keyword| %>
 	         
 	         <li>
-		 <%= tag.name %>
+		 <%= keyword.name %>
 		 (
-		 <%= check_box_tag 'delete_tags_ids[]', tag.id -%>
+		 <%= check_box_tag 'keywords_to_delete[]', keyword.name -%>
 		 ) 
 		 </li>  
 		 <br>
@@ -64,7 +64,7 @@
          <%= form_for @photo, url: admin_collection_photo_path(@photo), method: :patch  do |f| %> 
           <% @available_tags.each do |tag| %>
 	      <li>
-		<%= check_box_tag 'tag_with_ids[]', tag.id -%>
+		<%= check_box_tag 'keywords_to_append[]', tag.keyword -%>
 		<%= tag.keyword -%>
 	      </li>
 	      <% end %>

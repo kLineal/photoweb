@@ -9,20 +9,18 @@ def new
 end
 
 # GET 'admin/collection_photos'
+#
+# index with filter capabilities
 def index
   
-  @all_tags = CollectionTag.all
-  @ftags = []
+  @all_collection_tags = CollectionTag.all
   
-  # show only photos filtered by tags,
-  # and make the filter available to the view
-  if params[:filter_by_tags_ids]
+  # show either photos filtered by @filter or all
+  @filter = []
+  if params[:filter_by_keywords]
     
-    params[:filter_by_tags_ids].each { |id| @ftags << id.to_i  }
-    
-    keywords = get_keywords(params[:filter_by_tags_ids])
-    
-    @photos = CollectionPhoto.tagged_with(keywords, :on => :keywords, :math_all => true)
+    @filter = params[:filter_by_keywords]
+    @photos = CollectionPhoto.tagged_with(@filter, :on => :keywords, :any => true)
     
   else @photos = CollectionPhoto.all  
   end
@@ -42,7 +40,7 @@ def create
     
   @photo = CollectionPhoto.new(photo_params)
   
-  @photo.save
+  @photo.save!
   
   redirect_to admin_collection_photo(@photo)
   
@@ -53,38 +51,80 @@ def edit
   
   @photo = CollectionPhoto.find(params[:id])
   @available_tags = CollectionTag.all
-
+  
 end
 
 # PATCH/PUT 'admin/collection_photos/:id'
 #
-# tag (and/or delete) params[:id] with collection_tags 
-# whose ids are given in params[:tag_with_ids] ( or in params[:delete_tag_ids])
+# adds and/or remove keywords to collection_photo in params[:id]
+# first remove then add (removing and adding a keywords untouches it)
 def update
 
   photo = CollectionPhoto.find(params[:id])
   
-  # first remove then add (removing and adding a tag untouches it)
-  if params[:delete_tags_ids]
-    
-    keywords = get_keywords(params[:delete_tags_ids])
-    photo.keyword_list.remove(keywords)
-      
-  end
   
-  if params[:tag_with_ids]
+  photo.keyword_list.remove(params[:keywords_to_delete]) if params[:keywords_to_delete]
+
+  photo.keyword_list.add(params[:keywords_to_append])    if params[:keywords_to_append]
   
-    keywords = get_keywords(params[:tag_with_ids])
-    photo.keyword_list.add(keywords)
- 
-  end
-  
-  photo.save
+  photo.save!
   photo.reload
   redirect_to edit_admin_collection_photo_path(photo)
+  #render plain: params[:keywords_to_append].inspect
+end
+
+# "GET 'admin/collection_photos/edit_batch'
+def edit_batch
+
+if params[:photos_to_tag_ids]
+    @batch = CollectionPhoto.find(params[:photos_to_tag_ids])
+else
+  @batch = CollectionPhoto.find(params[:filtered_index_ids])
+end
+
+@collection_tags = CollectionTag.all
+
+# find join tags (so we can batch-delete them if wanted to)
+@join_keywords= @batch.first.keyword_list
+@batch.each {|photo| @join_keywords = @join_keywords & photo.keyword_list }
 
 end
 
+# PUT 'admin/collection_photos/'
+def update_batch
+  
+  if params[:photo_batch_ids]
+  
+    photos = CollectionPhoto.find(params[:photo_batch_ids])
+    
+    photos.each do |photo|
+      
+      photo.keyword_list.remove(params[:keywords_to_delete]) if  params[:keywords_to_delete]
+      photo.keyword_list.add(params[:keywords_to_append])    if  params[:keywords_to_append]
+      
+      photo.save!
+      photo.reload
+
+    end
+    
+  end
+
+
+#    
+    
+#    photos = CollectionPhoto.find(params[:photos_to_tag_ids])
+#    keywords = get_keywords(params[:tag_with_ids])
+   
+#    photos.each do |photo| 
+      
+      #photo.keyword_list.add(keywords)
+      #photo.save 
+      #photo.reload
+    
+#    end
+  
+redirect_to admin_collection_photos_path
+end
 
 # DELETE 'admin/collection_photos/:id'
 def destroy
@@ -108,10 +148,4 @@ def photo_params
 end
 
 
-def get_keywords ids
-  tags = CollectionTag.find(ids)
-  keywords = []
-  tags.each { |tag| keywords << tag.keyword }
-  keywords
-end
 end

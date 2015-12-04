@@ -2,7 +2,7 @@
 <style>
 #index_photos{border:2px solid #009900;float:left;margin-right:10px}
 #filter_by{border: 2px solid #0000FF;width:30%;float:right}
-#tag_with{border: 2px solid #FF0000;width:30%;margin-top:10px;float:right;clear:right}<!-- clear filter_by on the right !-->
+#edit_batch{border: 2px solid #FF0000;width:30%;margin-top:10px;float:right;clear:right}<!-- clear filter_by on the right !-->
 </style>
 </head>
 
@@ -14,65 +14,76 @@
   
   <div class="wrapper">
     
-    <div id="index_photos">
+     <%= form_tag({controller: "collection_photos", action: "edit_batch"}, method: "GET") do %>
+
+      <div id="index_photos">
       
-      <table>
+        <table>
 	
-	<% @photos.each do |photo| %>
+	  <% @photos.each do |photo| %>
 	
-	<tr>
-	  <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
-	  <td><%=photo.name%></td>
-	  <td></td><td></td>
-	  <td><%= link_to 'Mostrar', admin_collection_photo_path(photo) %></td>
-	  <td><%= link_to 'Editar', edit_admin_collection_photo_path(photo)%></td>
-	  <td><%= link_to 'Destruir', admin_collection_photo_path(photo),
+	   <tr>
+	     <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
+	     <td><%=photo.name%></td>
+	     <td></td><td></td>
+	     <td><%= link_to 'Mostrar', admin_collection_photo_path(photo) %></td>
+       	     <td><%= link_to 'Editar', edit_admin_collection_photo_path(photo)%></td>
+	     <td><%= link_to 'Destruir', admin_collection_photo_path(photo),
 		  method: :delete,
 		  data: { confirm: 'Are you sure?' } %></td>
 	  
-	  <td>Keywords:
-	    <% if !photo.keywords.any?%> 
+	     <td>Keywords:
+	     <% if !photo.keywords.any?%> 
 	       ninguno
 	    
-	    <% else %>
+	     <% else %>
 	      
-	      <% photo.keywords.each do |keyword| %>
+	        <% photo.keywords.each do |keyword| %>
 	      
-	        <%= keyword.name %>
+	           <%= keyword.name %>
 		
-	      <% end %>
-	    <% end %>
-	  </td>
+	        <% end %>
+	    
+             <% end %>
+	     </td>
+	   </tr>
+	   
+	  <tr>
+	   <td> <%= check_box_tag 'photos_to_tag_ids[]', photo.id %>  Seleccionar para batch-edit</td>
+	   <%= hidden_field_tag 'filtered_index_ids[]', photo.id  %>
+	  </tr>
 	  
-	
-	</tr>
-	
-	<% end %>
+	  <% end %>
 	
       </table>
       
     </div>
-   
+     
+      
+      <div id="edit_batch">
+     
+      <%= submit_tag "Editar fotos seleccionadas (o todas)" %>
+    </div>
+   <% end %>
+
     <div id="filter_by">
       
       <%= form_tag(admin_collection_photos_path, method: "GET") do %>
       
-         <% @all_tags.each do |tag| %>
-	   <%= check_box_tag 'filter_by_tags_ids[]', tag.id, @ftags.include?(tag.id)%>
+         <% @all_collection_tags.each do |tag| %>
+	   <%= check_box_tag 'filter_by_keywords[]', tag.keyword, @filter.include?(tag.keyword)%>
 	    <%= tag.keyword %>
 	    <br>
 	   
 	   <% end %>
        
-	   <%= submit_tag "filtrar por keywords (match all)" %>
+	   <%= submit_tag "filtrar por keywords (any)" %>
       
 	   <% end %>
       
     </div>
     
-    <div id="tag_with">
-      Add tags from:
-    </div>
+   
     
   </div>
 

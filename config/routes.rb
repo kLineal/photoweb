@@ -13,9 +13,15 @@ Rails.application.routes.draw do
   namespace :admin do
     
     root 'welcome#index'
-    resources :collection_photos, 
-              :collection_views
-    
+    resources :collection_photos do 
+                 collection do
+                   get 'collection_photos/edit_batch' => 'collection_photos#edit_batch' 
+                   put 'collection_photos/edit_batch' => 'collection_photos#update_batch'  
+                 end
+              end
+    resources :collection_views
+              
+    # this may should be made CRUD
     get  'collection_tags/' => 'collection_tags#index'
     post 'collection_tags/' => 'collection_tags#create'
   end

@@ -1,6 +1,6 @@
 class CollectionPhoto < ActiveRecord::Base
 
-# For clarity: the context maps to column 'keyword' 
-# of CollectionTag model 
+# context maps to attribute 'keyword' of collection_tag table 
 acts_as_taggable_on :keywords
+
 end

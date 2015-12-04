@@ -1,0 +1,63 @@
+<style>
+#photo_batch{border:2px solid #000000; float: left; width: 33%; }
+#delete_tags{border:2px solid #000000; float: right; width: 33%; }
+#add_tags{border:2px solid #000000; float: right;  width: 33%; }
+#submit{width:100%;text-align:right;margin-bottom:10px;margin-top:10px;clear:both}
+</style>
+
+<body>
+
+<h4><%= link_to 'Vuelta a Indice', admin_collection_photos_path %></h4>
+
+<%= form_tag({controller: "collection_photos", action: "update_batch"}, method: "PUT") do %>
+
+<div id="submit">
+<%= submit_tag 'Actualizar' %>
+</div>
+
+<div id="photo_batch">
+  
+  <h4> Batch:</h4>
+  
+  <% @batch.each do |photo| %>
+    <img src="/sample/<%=photo.name%>", WIDTH=30%, HEIGHT=30%> 
+    <%= photo.name %>
+    <%= hidden_field_tag 'photo_batch_ids[]', photo.id%>
+    <br><br>
+  <% end %>
+</div>
+
+<div id="delete_tags">
+
+  <h4> Selecciona para eliminar </h4> 
+
+  (mostrando keywords comunes a todas las fotos):
+  <br><br>
+  <ul>
+   <% @join_keywords.each do |keyword| %>
+     <li> <%= check_box_tag 'keywords_to_delete[]', keyword %> 
+          <%= keyword %> 
+     </li>
+   <% end %>
+   </ul>
+  
+</div>
+
+<div id="add_tags">
+
+ <h4> Selecciona keyword para anadir </h4>
+  <ul>
+  <% @collection_tags.each do |tag| %>
+  <li>
+    <%= check_box_tag 'keywords_to_append[]', tag.keyword %> 
+    <%= tag.keyword %>
+  </li>
+  <% end %>
+  </li>
+
+</div>
+
+<% end %>
+
+
+</body>
