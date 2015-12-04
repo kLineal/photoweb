@@ -1,11 +1,30 @@
-<!DOCTYPE html>
-<html>
-
 <head>
 <style>
-.column-left{ float: left; width: 33%; }
-.column-right{ float: right; width: 33%; }
-.column-center{ display: inline-block; width: 33%; }
+#batch_photos{
+              border:2px solid #009900;
+              float:left;
+              width:50%;
+              margin-right:10px;
+              top: 20px;
+              height:800px;
+              overflow-y:scroll;
+              clear:left
+}
+#delete_tags{
+           border: 2px solid #0000FF;
+           width:30%;
+           height:600px;
+           float:right;
+           overflow-y:scroll; 
+}
+#add_tags{
+           border: 2px solid #0000FF;
+           width:30%;
+           height:600px;
+           float:right;
+           overflow-y:scroll;
+}
+ 
 
 </style>
 </head>
@@ -17,9 +36,8 @@
 <%= link_to 'Vuelta a Indice', admin_collection_photos_path %>
 <br><br>
 
-  <div class="edit">
- 
-     <div class="column-center">
+
+     <div id="delete_tags">
         Tagged with:
        <br><br>
       
@@ -42,7 +60,7 @@
    
      </div>
    
-     <div class="column-left">
+     <div id="batch_photos">
        
        <img src="/sample/<%=@photo.name%>", WIDTH=50%, HEIGHT=50%>
        <br><br>
@@ -54,7 +72,7 @@
        <% end %>
      </div>
    
-     <div class="column-right">
+     <div id="delete_tags">
        Add tags from: 
        <br><br>
        <% if @available_tags.empty? %> No keywords known
@@ -76,8 +94,7 @@
 	 <% end %>
      </div>
      
- </div>
+
 
 
 </body>
-</html>

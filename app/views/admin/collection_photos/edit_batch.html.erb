@@ -1,8 +1,37 @@
 <style>
-#photo_batch{border:2px solid #000000; float: left; width: 33%; }
-#delete_tags{border:2px solid #000000; float: right; width: 33%; }
-#add_tags{border:2px solid #000000; float: right;  width: 33%; }
-#submit{width:100%;text-align:right;margin-bottom:10px;margin-top:10px;clear:both}
+#photo_batch{
+              border:2px solid #009900;
+              float:left;
+              width:35%;
+              margin-right:10px;
+              top: 20px;
+              height:600px;
+              overflow-y:scroll;
+              clear:left
+}
+#delete_tags{
+           border: 2px solid #0000FF;
+           width:30%;
+           height:600px;
+           float:right;
+           margin-right:10px;
+           overflow-y:scroll;
+}
+#add_tags{
+           border: 2px solid #0000FF;
+           width:30%;
+           height:600px;
+           margin-right:10px;
+           float:right;
+           overflow-y:scroll;
+}
+#submit{
+        width:100%;  
+        text-align:right;
+        margin-bottom:10px;
+        margin-top:10px; 
+        clear:both}
+
 </style>
 
 <body>
@@ -20,7 +49,7 @@
   <h4> Batch:</h4>
   
   <% @batch.each do |photo| %>
-    <img src="/sample/<%=photo.name%>", WIDTH=30%, HEIGHT=30%> 
+    <img src="/sample/<%=photo.name%>", WIDTH=25%, HEIGHT=25%> 
     <%= photo.name %>
     <%= hidden_field_tag 'photo_batch_ids[]', photo.id%>
     <br><br>
@@ -29,8 +58,11 @@
 
 <div id="delete_tags">
 
-  <h4> Selecciona para eliminar </h4> 
+  <h4> Selecciona keywords para eliminar </h4> 
 
+  <% if @join_keywords.empty? %>
+     No hay keywords comunes
+  <% else %>
   (mostrando keywords comunes a todas las fotos):
   <br><br>
   <ul>
@@ -40,6 +72,7 @@
      </li>
    <% end %>
    </ul>
+  <% end %>
   
 </div>
 

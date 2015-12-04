@@ -1,21 +1,49 @@
 <head>
 <style>
-#index_photos{border:2px solid #009900;float:left;margin-right:10px}
-#filter_by{border: 2px solid #0000FF;width:30%;float:right}
-#edit_batch{border: 2px solid #FF0000;width:30%;margin-top:10px;float:right;clear:right}<!-- clear filter_by on the right !-->
+
+
+#index_photos{
+              border:2px solid #009900;
+              float:left;
+              margin-right:10px;
+              top: 20px;
+              height:600px;
+              overflow-y:scroll;
+              clear:left
+}
+#filter_by{
+           border: 2px solid #0000FF;
+           width:30%;
+           height:600px;
+           float:right;
+           overflow-y:scroll;
+}
+#submit_edit_batch{
+            border: 2px solid #FF0000; 
+            margin-bottom:10px;
+            float:left;
+            clear:both <!-- clear filter_by on the right !-->
+}
+
 </style>
 </head>
 
 <body>
+
+
   <h1>Archivo de Fotos</h1>
   
   <%= link_to 'Vueta a Admin', admin_root_path %>
   <br><br>
   
-  <div class="wrapper">
+  
     
      <%= form_tag({controller: "collection_photos", action: "edit_batch"}, method: "GET") do %>
 
+       <div id="submit_edit_batch">
+        <%= submit_tag "Editar fotos seleccionadas (o todas)" %>
+       </div>
+       
       <div id="index_photos">
       
         <table>
@@ -59,32 +87,23 @@
       
     </div>
      
-      
-      <div id="edit_batch">
-     
-      <%= submit_tag "Editar fotos seleccionadas (o todas)" %>
-    </div>
    <% end %>
 
     <div id="filter_by">
-      
+      <h4>Mostrando filtradas por keywords:</h4>
       <%= form_tag(admin_collection_photos_path, method: "GET") do %>
       
          <% @all_collection_tags.each do |tag| %>
-	   <%= check_box_tag 'filter_by_keywords[]', tag.keyword, @filter.include?(tag.keyword)%>
+	   <ul>
+	     <%= check_box_tag 'filter_by_keywords[]', tag.keyword, @filter.include?(tag.keyword)%>
 	    <%= tag.keyword %>
-	    <br>
-	   
+	  </ul> 
 	   <% end %>
        
-	   <%= submit_tag "filtrar por keywords (any)" %>
+	   <%= submit_tag "filtrar (any)" %>
       
 	   <% end %>
       
     </div>
-    
-   
-    
-  </div>
 
 </body>
