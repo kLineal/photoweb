@@ -8,4 +8,15 @@ def self.view_types
 
 end
 
+# photos of a view are those with 'keywords' 
+# as a _subset_ of their tags: match_any
+def photos
+
+  keywords = []
+  self.collection_tags.each { |tag| keywords << tag.keyword }
+ 
+  CollectionPhoto.tagged_with(keywords, :on => :keywords, :match_any => true)
+
+end
+
 end
