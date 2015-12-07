@@ -1,6 +1,7 @@
 class Admin::CollectionViewsController < ApplicationController
 
-# Each view shows photos tagged under associated tags
+# Each collection_view shows collection_photos 
+# that are tagged with associated collection_tag records
 
 # GET 'admin/collection_views'
 def index
@@ -85,10 +86,6 @@ end
 def show
  
  @this_view = set_view
- 
- keywords = []
- @this_view.collection_tags.each {  |tag| keywords<< tag.keyword }
- 
  @photos = @this_view.photos
   
 end
