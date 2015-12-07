@@ -44,19 +44,24 @@
 <h1><center> Fotos en vista "<%= @this_view.name %>"</center></h1> <br>
 <h4><%= link_to 'Vuelta Indice Vistas', admin_collection_views_path %></h4>
 
-<%@photos.each do |photo|%>
+<% if @photos.empty?%> 
+  <h2><center> No hay fotos en esta vista todavia</center><h2>
+
+<% else %>
+  <%@photos.each do |photo|%>
  
-<!-- Make the div clickable (link_to accepts blocks)!-->
-<%= link_to edit_admin_collection_photo_path(photo) do  %>
-  <div class="picture">
+    <!-- Make the div clickable (link_to accepts blocks)!-->
+    <%= link_to edit_admin_collection_photo_path(photo) do  %>
+       <div class="picture">
     
-    <img src="/sample/<%=photo.name%>"/>
+       <img src="/sample/<%=photo.name%>"/>
     
-  </div>
-<% end %>
+       </div>
+    <% end %>
+
+  <% end %>
 
 <% end %>
-
 
 <!-- Slideshow with cycle
 
