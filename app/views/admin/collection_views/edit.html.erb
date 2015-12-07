@@ -7,6 +7,36 @@
 .column-right{ float: right; width: 33%; }
 .column-center{ display: inline-block; width: 33%; }
 
+#properties{
+              border:2px solid #009900;
+              float:left;
+              top: 20px;
+              height:400px;
+              width:33%;
+              clear:left;
+}
+
+#delete_keywords{
+           border: 2px solid #0000FF;
+           width:33%;
+           height:400px;
+           float:right;
+           overflow-y:scroll; 
+}
+#add_keywords{
+           border: 2px solid #0000FF;
+           width:33%;
+           height:400px;
+           float:right;
+           overflow-y:scroll;
+}
+#submit{
+        width:100%;  
+        text-align:right;
+        margin-bottom:10px;
+        margin-top:10px; 
+        clear:both}
+
 </style>
 </head>
 
@@ -18,22 +48,24 @@
 <br><br>
 
 <%= form_for @view, url: admin_collection_view_path(@view), method: :patch  do |f| %>
-  <div class="edit">
+
  
-     <div class="column-center">
-        Tags in this route:
+     <div id="submit">
+       <%= f.submit "Edit view"%>
+     </div>
+ 
+     <div id="delete_keywords">
+        <h3><center>Seleccionar keywords para BORRAR:</center></h4>
        <br><br>
       
          <% if @tags.empty? %>  No associated tags
          <% else %> 
 	   
               <% @tags.each do |tag| %>
-	         <li>
-		 <%= tag.keyword %>
-		 (delete?
+	         <ul>
 		 <%= check_box_tag 'delete_tags_ids[]', tag.id -%>
-		 ) 
-		 </li>  
+		 <%= tag.keyword %>
+		 </ul>  
 		 <br>
               <% end %>
 	  
@@ -41,9 +73,8 @@
    
      </div>
    
-     <div class="column-left">
-        
-        
+     <div id="properties">
+       <br>
        <%= f.label :name  %>
         <%= f.text_field :name %>
 	<br><br>
@@ -56,34 +87,26 @@
 	  <%=type %>
 	  <br>
 	<% end %>
-	
-	<br>
-	
-       
      </div>
    
-     <div class="column-right">
-       Add tags from: 
-       <br><br>
+     <div id="add_keywords">
+       <h3><center>Seleccionar keywords para ANADIR</center></h3> 
+       
        <% if @available_tags.empty? %> No keywords known
        
        <% else %>
       
           
           <% @available_tags.each do |tag| %>
-	      <li>
+	      <ul>
 		<%= check_box_tag 'add_tags_ids[]', tag.id -%>
 		<%= tag.keyword -%>
-	      </li>
+	      </ul>
 	      <% end %> 
          
 	 <% end %>
      </div>
      
- </div>
-<div class="submit">
-<%= f.submit "Edit view"%>
-</div>
 <% end %>
 
 </body>
