@@ -17,6 +17,14 @@ def create
 
 end
 
+def rename
+
+end
+
+def destroy
+
+end
+
 private
 
 #whitelists attribute 'keyword' of CollectionTag

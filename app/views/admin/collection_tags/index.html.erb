@@ -1,11 +1,29 @@
+<head>
+<style>
+
+#new_keyword{
+      float: right;
+      width:33%;     
+}
+#list_keywords{
+                 border: 2px solid #0000FF;
+                 width:50%;
+                 float:left;
+                 overflow: auto;
+                 left: 2px;
+}
+
+</style>
+</head>
+
 <body>
 <%= link_to 'Vuelta a Admin', admin_root_path %>
-<h1><center> Indice the Keywords </center></h1>
+<h1><center> Indice de keywords </center></h1>
 <br><br>
 
-<div style="width: 100%;overflow:auto;">
+<div id="new_keyword">
     
-  <div align="left" style="float:left; width: 80%">
+  
      <%= form_for :collection_tag, url: admin_collection_tags_path do |f| %>
   <p>
     <%= f.label :new_keyword %><br>
@@ -17,17 +35,24 @@
   </p>
 <% end %>
       
-    </div>
-    <div align="right" style="float:right;">
+</div>
+    
+
+<div id="list_keywords">
       
-      <h2> Keywords existentes: </h2>
-      <br>
+      <h2> Keywords existentes </h2>
+  
       <% if @current_keywords.empty? %> Ninguno
       <% else %>
+       <ul>
         <% @current_keywords.each do |tag| %>
-          <%=tag.keyword %> 
-          <br>
-        <% end %>
+         <li>    
+	    <%=tag.keyword %>
+	    link to 'Renombrar'
+	    link to 'Eliminar' 
+          </li>
+         <% end %>
+      </ul>
       <% end %>
     
 </div>
