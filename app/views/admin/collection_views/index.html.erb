@@ -72,7 +72,9 @@
       <li> <%= link_to 'Destruir', admin_collection_view_path(view),
                                    method: :delete,
                                    data: { confirm: 'Estas seguro?' } %> </li>
+      <li> Number of photos: <%= view.number_of_photos%></li>
     </ul>
+    
   </div>
 </div>
 <% end %>

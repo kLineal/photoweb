@@ -33,4 +33,11 @@ def photos
 
 end
 
+#number of photos
+def number_of_photos
+ 
+ self.photos.size
+
+end
+
 end
