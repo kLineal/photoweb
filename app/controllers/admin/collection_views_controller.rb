@@ -49,7 +49,7 @@ this_view = set_view
     
     tags_to_append.each do |tag|  
       if !this_view.collection_tags.exists?(tag.id)
-      this_view.collection_tags<< tag
+       this_view.collection_tags<< tag
       end 
     end
     
@@ -79,7 +79,6 @@ this_view = set_view
   
   redirect_to edit_admin_collection_view_path(this_view)
  
-#render plain: params.inspect
 end
 
 # GET 'admin/collection_views/:id'
