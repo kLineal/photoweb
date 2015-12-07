@@ -1,4 +1,7 @@
 <head> 
+<style>
+
+<!-- commented css for slideshow (jplugin cycle)
 <style type "text/css">
 .route {  
     height:  232px;  
@@ -16,13 +19,47 @@
     top:  0; 
     left: 0 
 }
+!-->
+
+.picture{
+          border:  2px solid #000000;
+          width:   200px; 
+          height:  200px;
+         
+}
+
+.picture img{
+             float: left;
+             border:  2px solid #000000;
+             width:   200px;
+             heigth:  200px;
+             margin:  1px;
+}
+
 </style>
 </head>
 
 <body>
 
-<h1> Viendo: <%= @this_view.name %>:</h1> <br>
-<%= link_to 'Vuelta Indice Vistas', admin_collection_views_path %>
+<h1><center> Fotos en vista "<%= @this_view.name %>"</center></h1> <br>
+<h4><%= link_to 'Vuelta Indice Vistas', admin_collection_views_path %></h4>
+
+<%@photos.each do |photo|%>
+ 
+<!-- Make the div clickable (link_to accepts blocks)!-->
+<%= link_to edit_admin_collection_photo_path(photo) do  %>
+  <div class="picture">
+    
+    <img src="/sample/<%=photo.name%>"/>
+    
+  </div>
+<% end %>
+
+<% end %>
+
+
+<!-- Slideshow with cycle
+
 <div align="center">
 <div class="nav"><a id="prev" href="#">Prev</a> <a id="next" href="#">Next</a></div>
 <div class="route"> 
@@ -44,4 +81,6 @@
 </script>
 
 </div>
+!-->
+
 </body>

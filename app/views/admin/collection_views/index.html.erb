@@ -1,3 +1,41 @@
+<head>
+<style>
+
+.view{
+      border:2px solid #009900;
+      clear:both;
+      height:100%;
+      width:100%
+}
+
+.view_header{
+     clear:both
+}
+
+.photos_view{
+              border:2px solid #009900;
+              float:left;
+              margin-right:10px;
+              top: 20px;
+              height:400px;
+              width:30%;
+              overflow-y:scroll;
+              clear:left
+}
+.photos_view img {
+   width: 100%;
+}
+
+.view_properties{
+                 border: 2px solid #0000FF;
+                 width:50%;
+                 float:right;
+                 height:400px;
+}
+
+</style>
+</head>
+
 <body>
 
 <%= link_to 'Vuelta a Admin', admin_root_path %>
@@ -6,19 +44,37 @@
 
 <br>
 
-<table>
+
+
 <% @views.each do |view| %>
-<tr>
+
+ <div class="view">
+ 
+   <div class="view_header">
+     <h3><center><%=view.name%></center</h3>
+   </div>
+     
+       <div class="photos_view">
+	 <h4><center>Fotos:</center></h4>
+         <% view.photos.each do |photo| %>
+         <img src="/sample/<%=photo.name%>"> 
+         <br><br>
+       <% end %>
+       </div>
+
+  <div class="view_properties">
     
-    <td><%=view.name%></td>
-    <td></td><td></td>
-    <td><%= link_to 'Mostrar', admin_collection_view_path(view) %></td>
-    <td><%= link_to 'Editar', edit_admin_collection_view_path(view)%></td>
-    <td><%= link_to 'Destruir', admin_collection_view_path(view),
-              method: :delete,
-              data: { confirm: 'Estas seguro?' } %></td>
-</tr>
-    <%end%>
-</table>
+    <ul>
+      <li> <%= link_to 'Mostrar', admin_collection_view_path(view) %> </li>
+   
+      <li> <%= link_to 'Editar', edit_admin_collection_view_path(view)%> </li>
+    
+      <li> <%= link_to 'Destruir', admin_collection_view_path(view),
+                                   method: :delete,
+                                   data: { confirm: 'Estas seguro?' } %> </li>
+    </ul>
+  </div>
+</div>
+<% end %>
 
 </body>

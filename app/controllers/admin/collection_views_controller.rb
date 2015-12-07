@@ -91,8 +91,6 @@ def show
  
  @photos = @this_view.photos
   
-  #render plain: @photos.each {|photo| puts photo.name}
-  #render plain: keywords.inspect
 end
 
 
