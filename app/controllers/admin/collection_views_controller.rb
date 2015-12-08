@@ -89,9 +89,17 @@ def show
   
 end
 
-
+# DELETE /admin/collection_views/:id
 def destroy
-render plain: "action to be implemented"
+
+this_view = set_view
+
+# callback to clear associated collection_tags
+#             from the join table
+this_view.destroy
+
+redirect_to admin_collection_views_path
+#render plain: "action to be implemented"
 end
 
 private

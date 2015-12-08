@@ -1,10 +1,17 @@
 class CollectionView < ActiveRecord::Base
 
-has_and_belongs_to_many :collection_tags, join_table: "collection_tags_views"
+### ASSOCIATIONS
 
-###
-# CLASS METHODS
-###
+has_and_belongs_to_many :collection_tags, 
+                        join_table: "collection_tags_views"
+
+
+### CALLBACKS
+
+before_destroy :clear_associated_views
+
+### CLASS METHODS
+
 def CollectionView.view_types
 
   ['cover', 'partial']
@@ -12,9 +19,8 @@ def CollectionView.view_types
 end
 
 
-###
-# INSTANCE METHODS
-###
+
+#### INSTANCE METHODS
 
 
 # get keyword attribute of associated collection_tag records
@@ -38,6 +44,12 @@ def number_of_photos
  
  self.photos.size
 
+end
+
+def clear_associated_views
+  
+  self.collection_tags.clear
+  
 end
 
 end
