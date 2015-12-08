@@ -28,7 +28,8 @@ end
 
 def untag_photos
   
-  
+  photos = self.tagged_photos
+
   if self.tagged_photos.any? 
     
     self.tagged_photos.each do |photo| 
@@ -39,8 +40,31 @@ def untag_photos
       
     end
   end
-  
+
   self
 end
+
+# retags photos under tag's keyword 
+# with new given keyword
+def rename_keyword renamed_keyword
+  
+  photos = self.tagged_photos
+  
+  if photos.any? 
+    
+    photos.each do |photo|
+      
+      photo.keyword_list.remove(self.keyword) 
+      photo.keyword_list.add(renamed_keyword)
+      photo.save!
+      photo.reload
+    end
+  end
+  
+  self[:keyword] = renamed_keyword
+  self.save!
+end
+
+
   
 end

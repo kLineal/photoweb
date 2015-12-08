@@ -1,0 +1,13 @@
+<body>
+<%= form_for @tag, url: {action: "update"}, method: "PUT" do |f| %>
+  <p>
+    <%= f.label :keyword %><br>
+    <%= f.text_field :keyword %>
+  </p>
+ 
+  <p>
+    <%= f.submit 'renombrar keyword'%>
+  </p>
+<% end %>
+
+</body>
