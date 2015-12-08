@@ -7,13 +7,14 @@ has_and_belongs_to_many :collection_views,
 
 
 #### CALLBACKS
-before_destroy :remove_from_views
+before_destroy :clear_associated_views
 before_destroy :untag_photos
 
 
 
 ### INSTANCE METHODS
-def remove_from_views
+
+def clear_associated_views
   
   self.collection_views.clear
 

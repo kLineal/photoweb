@@ -8,7 +8,7 @@ has_and_belongs_to_many :collection_tags,
 
 ### CALLBACKS
 
-before_destroy :clear_associated_views
+before_destroy :clear_associated_tags
 
 ### CLASS METHODS
 
@@ -46,7 +46,7 @@ def number_of_photos
 
 end
 
-def clear_associated_views
+def clear_associated_tags
   
   self.collection_tags.clear
   
