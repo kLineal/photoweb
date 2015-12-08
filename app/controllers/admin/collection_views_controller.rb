@@ -11,8 +11,7 @@ end
 #GET '/admin/collection_views/new'
 def new
 
-#collapse to index
-#redirect_to collection_views_path
+@TYPES = CollectionView.view_types
 
 end
 
@@ -22,7 +21,7 @@ def create
   view = CollectionView.new(view_params)
   view.save
   redirect_to admin_collection_views_path 
-
+  
 end
  
 
@@ -107,7 +106,7 @@ private
 # whitelists attributes
 def view_params 
   
-  params.require(:collection_view).permit(:name,:type_view)
+  params.require(:collection_view).permit(:name,:view_type)
   
 end
 
