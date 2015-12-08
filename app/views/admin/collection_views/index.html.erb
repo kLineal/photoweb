@@ -28,10 +28,16 @@
 }
 
 .view_properties{
-                 border: 2px solid #0000FF;
                  width:50%;
                  float:right;
                  height:400px;
+}
+
+.button_frame{
+            border: 2px solid #0000FF; 
+            margin-bottom:10px;
+            float:left;
+            clear:both <!-- clear  !-->
 }
 
 </style>
@@ -56,7 +62,7 @@
    </div>
      
        <div class="photos_view">
-	 <h4><center>Fotos:</center></h4>
+	 <h4><center>Fotos (<%= view.number_of_photos%>)</center></h4>
          <% view.photos.each do |photo| %>
          <img src="/sample/<%=photo.name%>"> 
          <br><br>
@@ -65,16 +71,19 @@
 
   <div class="view_properties">
     
-    <ul>
-      <li> <%= link_to 'Mostrar', admin_collection_view_path(view) %> </li>
-   
-      <li> <%= link_to 'Editar', edit_admin_collection_view_path(view)%> </li>
-    
-      <li> <%= link_to 'Destruir', admin_collection_view_path(view),
+    <div class="button_frame">
+      <%= button_to 'Mostrar', admin_collection_view_path(view), { method: :get} %>
+    </div>
+    <br><br><br><br>
+    <div class="button_frame">
+       <%= button_to 'Editar', edit_admin_collection_view_path(view), { method: :get}%>
+    </div>
+    <br><br><br><br>
+    <div class="button_frame" style="border: 2px solid #FF0000;" >
+       <%= button_to 'Destruir', admin_collection_view_path(view),
                                    method: :delete,
-                                   data: { confirm: 'Estas seguro?' } %> </li>
-      <li> Numero de fotos: <%= view.number_of_photos%></li>
-    </ul>
+                                   data: { confirm: 'Estas seguro?' } %> 
+    </div>
     
   </div>
 </div>
