@@ -43,11 +43,10 @@
 <br>
 <h1><center>Indice de Vistas</center></h1>
 
-<br>
+<%= button_to "Crear una vista nueva", new_admin_collection_view_path, {method: :get } %>
 
-<h2><%= link_to 'Nueva Vista', controller: "collection_views", action: "new" %></h2>
- 
 <br><br>
+
 <% @views.each do |view| %>
 
  <div class="view">
