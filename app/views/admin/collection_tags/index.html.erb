@@ -49,7 +49,9 @@
          <li>    
 	    <%=tag.keyword %>
 	    link to 'Renombrar'
-	    link to 'Eliminar' 
+	    <%= link_to 'Destruir', admin_collection_tag_path(tag),
+                                   method: :delete,
+                                   data: { confirm: 'Estas seguro?' } %> 
           </li>
          <% end %>
       </ul>

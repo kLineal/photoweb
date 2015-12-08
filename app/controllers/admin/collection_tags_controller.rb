@@ -17,11 +17,22 @@ def create
 
 end
 
-def rename
+def edit
 
 end
 
 def destroy
+
+this_tag = set_tag
+
+# callback methods: 
+#                  - untag_photos (save & reload untagged photos)
+#                  - remove_from_views
+#
+this_tag.destroy
+
+# 
+redirect_to admin_collection_tags_path
 
 end
 
@@ -33,4 +44,11 @@ def tag_params
   params.require(:collection_tag).permit(:keyword)
   
 end
+
+def set_tag
+
+ CollectionTag.find(params[:id])
+
+end
+
 end
