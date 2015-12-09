@@ -54,7 +54,7 @@
     <%= link_to edit_admin_collection_photo_path(photo) do  %>
        <div class="picture">
     
-       <img src="/sample/<%=photo.name%>"/>
+       <img src="<%=photo.path_to_image%>"/>
     
        </div>
     <% end %>

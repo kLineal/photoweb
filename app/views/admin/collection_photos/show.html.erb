@@ -2,6 +2,6 @@
 
 <%= link_to 'Back to Index of Photos', admin_collection_photos_path %>
 <br><br>
-<img src="/sample/<%=@photo.name%>", WIDTH=90%, HEIGHT=90%>
-
+<img src="<%=@photo.path_to_image%>", WIDTH=90%, HEIGHT=90%>
+<%=@photo.path_to_image%>
 </body>

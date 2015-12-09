@@ -58,7 +58,7 @@
 	  <% @photos.each do |photo| %>
 	
 	   <tr>
-	     <td><img src="/sample/<%=photo.name%>", WIDTH=200, HEIGHT=200> </td>
+	     <td><img src="<%=photo.path_to_image%>", WIDTH=200, HEIGHT=200> </td>
 	     <td><%=photo.name%></td>
 	     <td></td><td></td>
 	     <td><%= link_to 'Mostrar', admin_collection_photo_path(photo) %></td>

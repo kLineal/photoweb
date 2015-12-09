@@ -50,7 +50,7 @@
   <h4> Batch:</h4>
   
   <% @batch.each do |photo| %>
-    <img src="/sample/<%=photo.name%>", WIDTH=25%, HEIGHT=25%> 
+    <img src="<%=photo.path_to_image%>", WIDTH=25%, HEIGHT=25%> 
     <%= photo.name %>
     <%= hidden_field_tag 'photo_batch_ids[]', photo.id%>
     <br><br>
