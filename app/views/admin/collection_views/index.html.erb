@@ -49,7 +49,9 @@
 <br>
 <h1><center>Indice de Vistas</center></h1>
 
+<div class="button_frame">
 <%= button_to "Crear una vista nueva", new_admin_collection_view_path, {method: :get } %>
+</div>
 
 <br><br>
 
@@ -71,19 +73,19 @@
 
   <div class="view_properties">
     
-    <div class="button_frame">
-      <%= button_to 'Mostrar', admin_collection_view_path(view), { method: :get} %>
-    </div>
-    <br><br><br><br>
-    <div class="button_frame">
-       <%= button_to 'Editar', edit_admin_collection_view_path(view), { method: :get}%>
-    </div>
-    <br><br><br><br>
-    <div class="button_frame" style="border: 2px solid #FF0000;" >
-       <%= button_to 'Destruir', admin_collection_view_path(view),
+   
+      <%= link_to 'Mostrar', admin_collection_view_path(view), { method: :get} %>
+  
+    <br><br>
+   
+       <%= link_to 'Editar', edit_admin_collection_view_path(view), { method: :get}%>
+   
+    <br><br>
+   
+       <%= link_to 'Destruir', admin_collection_view_path(view),
                                    method: :delete,
                                    data: { confirm: 'Estas seguro?' } %> 
-    </div>
+   
     
   </div>
 </div>
