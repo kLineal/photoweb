@@ -76,25 +76,24 @@ end
 # "GET 'admin/collection_photos/edit_batch'
 def edit_batch
 
-if params[:photos_to_tag_ids]
+  if params[:photos_to_tag_ids]
     @batch = CollectionPhoto.find(params[:photos_to_tag_ids])
-else
-  @batch = CollectionPhoto.find(params[:filtered_index_ids])
-end
-
-@collection_tags = CollectionTag.all
-
-# find join tags (so we can batch-delete them if wanted to)
-@join_keywords= @batch.first.keyword_list
-@batch.each {|photo| @join_keywords = @join_keywords & photo.keyword_list }
-
+  else
+    @batch = CollectionPhoto.find(params[:filtered_index_ids])
+  end
+  
+  @collection_tags = CollectionTag.all
+  
+  # find join tags (so we can batch-delete them if wanted to)
+  @join_keywords = CollectionPhoto.find_join_keywords_of(@batch)
+  
 end
 
 # PUT 'admin/collection_photos/'
 def update_batch
   
   if params[:photo_batch_ids]
-  
+    
     photos = CollectionPhoto.find(params[:photo_batch_ids])
     
     photos.each do |photo|
@@ -104,26 +103,10 @@ def update_batch
       
       photo.save!
       photo.reload
-
-    end
-    
+    end    
   end
-
-
-#    
-    
-#    photos = CollectionPhoto.find(params[:photos_to_tag_ids])
-#    keywords = get_keywords(params[:tag_with_ids])
-   
-#    photos.each do |photo| 
-      
-      #photo.keyword_list.add(keywords)
-      #photo.save 
-      #photo.reload
-    
-#    end
   
-redirect_to admin_collection_photos_path
+  redirect_to admin_collection_photos_path
 end
 
 # DELETE 'admin/collection_photos/:id'
