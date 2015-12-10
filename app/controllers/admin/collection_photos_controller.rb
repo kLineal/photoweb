@@ -96,14 +96,21 @@ def update_batch
     
     photos = CollectionPhoto.find(params[:photo_batch_ids])
     
+    #delete keywords
+    if params[:keywords_to_delete] 
+      photos.each { |photo| photo.keyword_list.remove(params[:keywords_to_delete]) }
+    end
+    
+    #add keywords
+    if  params[:keywords_to_append]
+      photos.each { |photo| photo.keyword_list.add(params[:keywords_to_append]) }
+    end
+    
+    # reload records
     photos.each do |photo|
-      
-      photo.keyword_list.remove(params[:keywords_to_delete]) if  params[:keywords_to_delete]
-      photo.keyword_list.add(params[:keywords_to_append])    if  params[:keywords_to_append]
-      
       photo.save!
       photo.reload
-    end    
+    end
   end
   
   redirect_to admin_collection_photos_path
