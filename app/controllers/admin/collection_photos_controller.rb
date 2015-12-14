@@ -14,17 +14,25 @@ end
 def index
   
   @all_collection_tags = CollectionTag.all
+  @PROPERTIES = CollectionPhoto.properties
   
-  # show either photos filtered by @filter or all
-  @filter = []
+  # show either photos filtered by (keywords and/or properties) or all
+  @keywords_filter  = []
+  @properties_filter = []
+  
   if params[:filter_by_keywords]
-    
-    @filter = params[:filter_by_keywords]
-    @photos = CollectionPhoto.tagged_with(@filter, :on => :keywords, :any => true)
-    
-  else @photos = CollectionPhoto.all  
+    @keywords_filter = params[:filter_by_keywords]
+    photos_by_keywords = CollectionPhoto.tagged_with(@keywords_filter, :on => :keywords, :any => true)
+  else photos_by_keywords = CollectionPhoto.all 
   end
-
+  
+  if params[:filter_by_properties]
+    @properties_filter = params[:filter_by_properties]
+    photos_by_properties = CollectionPhoto.tagged_with(@properties_filter, :on => :properties, :match_any => true)
+  else photos_by_properties = CollectionPhoto.all
+  end
+  @photos = photos_by_keywords & photos_by_properties
+  
 end
 
 

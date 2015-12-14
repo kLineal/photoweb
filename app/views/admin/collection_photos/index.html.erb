@@ -97,14 +97,22 @@
    <% end %>
 
     <div id="filter_by">
-      <h4>Mostrando filtradas por keywords:</h4>
+      <h4>Keywords:</h4>
 
       <%= form_tag(admin_collection_photos_path, method: "GET") do %>
       
          <% @all_collection_tags.each do |tag| %>
 	   <ul>
-	     <%= check_box_tag 'filter_by_keywords[]', tag.keyword, @filter.include?(tag.keyword)%>
+	     <%= check_box_tag 'filter_by_keywords[]', tag.keyword, @keywords_filter.include?(tag.keyword)%>
 	    <%= tag.keyword %>
+	  </ul> 
+	 <% end %>
+	 
+	 <h4>Propiedades:</h4>
+	 <% @PROPERTIES.each do |property| %>
+	   <ul>
+	     <%= check_box_tag 'filter_by_properties[]', property, @properties_filter.include?(property)%>
+	    <%= property %>
 	  </ul> 
 	 <% end %>
       
