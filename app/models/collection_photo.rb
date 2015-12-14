@@ -2,11 +2,30 @@ class CollectionPhoto < ActiveRecord::Base
 
 ### TAGGINGS
 
-# context maps to attribute 'keyword' of collection_tag table 
-acts_as_taggable_on :keywords
-
+# keywords' context maps to column 'keyword' of collection_tag table 
+acts_as_taggable_on :keywords, 
+                    :properties
 
 ### CLASS METHODS
+
+def CollectionPhoto.types
+
+# types of collection_photos:
+#                            - unclassified = new added photos
+#                            - archive      = personal collection
+#                            - portfolio    = project photo
+#                            - none       = default option to be shown 
+['none', 'archive', 'portfolio', 'unclassified']
+
+end
+
+
+def CollectionPhoto.properties
+
+  # values of context 'properties'
+  ['public', 'new']
+
+end
 
 # returns an array of common keywords
 def CollectionPhoto.find_join_keywords_of photo_batch 

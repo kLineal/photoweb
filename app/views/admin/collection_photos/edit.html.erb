@@ -52,21 +52,16 @@
      </div>
 
      <div id="delete_tags">
-        <h4><center> Selecciona keywords para BORRAR:</center></h4>
-      
-         <% if !@photo.keywords.any? %>  No tags
-         <% else %> 
+        <h4><center> Propiedades:</center></h4>      
 	    
-              <% @photo.keywords.each do |keyword| %>
+              <% @PROPERTIES.each do |property| %>
 	         
 	         <ul>
-		 <%= check_box_tag 'keywords_to_delete[]', keyword.name -%>
-		 <%= keyword.name %>
+		 <%= check_box_tag 'property_list[]', property, @photo.property_list.include?(property) -%>
+		 <%= property %>
 		 </ul>  
 
-              <% end %>
-
-         <% end %>
+              <% end %>   
    
      </div>
    
@@ -76,19 +71,22 @@
        <br><br>
         <%= f.label "Nombre:"  %>
         <%= f.text_field :name %>
+	<br>
+	<%= f.label "Tipo:"  %>
+        <%= f.select :collection_type, @TYPES %>
 
      </div>
    
      <div id="delete_tags">
 
-       <h4><center> Selecciona keywords para ANADIR:</center></h4> 
+       <h4><center> Keywords:</center></h4> 
        
        <% if @available_tags.empty? %> No keywords known
        
        <% else %>
           <% @available_tags.each do |tag| %>
 	      <ul>
-		<%= check_box_tag 'keywords_to_append[]', tag.keyword -%>
+		<%= check_box_tag 'keyword_list[]', tag.keyword, @photo.keyword_list.include?(tag.keyword) -%>
 		<%= tag.keyword -%>
 	      </ul>
 	      <% end %> 

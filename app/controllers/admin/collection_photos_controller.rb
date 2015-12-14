@@ -51,7 +51,8 @@ def edit
   
   @photo = CollectionPhoto.find(params[:id])
   @available_tags = CollectionTag.all
-  
+  @TYPES = CollectionPhoto.types
+  @PROPERTIES = CollectionPhoto.properties
 end
 
 # PATCH/PUT 'admin/collection_photos/:id'
@@ -63,14 +64,19 @@ def update
   photo = CollectionPhoto.find(params[:id])
   
   
-  photo.keyword_list.remove(params[:keywords_to_delete]) if params[:keywords_to_delete]
+  #photo.keyword_list.remove(params[:keywords_to_delete]) if params[:keywords_to_delete]
 
-  photo.keyword_list.add(params[:keywords_to_append])    if params[:keywords_to_append]
+  #photo.keyword_list.add(params[:keywords_to_append])    if params[:keywords_to_append]
+  
+  photo.keyword_list = params[:keyword_list]
+  photo.property_list = params[:property_list]
+  photo.collection_type = params[:collection_photo][:collection_type]
   
   photo.save!
   photo.reload
+ 
   redirect_to edit_admin_collection_photo_path(photo)
-  #render plain: params[:keywords_to_append].inspect
+  #render plain: params.inspect
 end
 
 # "GET 'admin/collection_photos/edit_batch'
