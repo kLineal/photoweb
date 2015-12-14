@@ -12,7 +12,10 @@ before_destroy :clear_associated_tags
 
 ### CLASS METHODS
 
-def CollectionView.view_types
+# two types of views:
+#                    - exclusive (all views of this type are pairwise disjoint and cover the entire collection)
+#                    - non-exclusive (views are partial, so a photo can be included in two distinct partial views)
+def CollectionView.types
 
   ['cover', 'partial']
 

@@ -11,7 +11,7 @@ end
 #GET '/admin/collection_views/new'
 def new
 
-@TYPES = CollectionView.view_types
+@TYPES = CollectionView.types
 
 end
 
@@ -28,7 +28,7 @@ end
 # GET admin/collection_views/:id/edit 
 def edit
 
-  @TYPES = CollectionView.view_types
+  @TYPES = CollectionView.types
   @view = set_view
   @tags = @view.collection_tags
   @available_tags = CollectionTag.all
