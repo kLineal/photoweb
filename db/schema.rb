@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(version: 20151119165244) do
 
   create_table "collection_photos", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "collection_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "collection_tags", force: :cascade do |t|

@@ -11,7 +11,7 @@
     <%= f.label "Tipo de vista"  %>
     <br>
     <% @TYPES.each do |type| %>
-    <%= f.radio_button :view_type, type %>
+    <%= f.radio_button :type, type %>
     <%= f.label :view_type, type, :value => type %>
     <br>
     <% end %>

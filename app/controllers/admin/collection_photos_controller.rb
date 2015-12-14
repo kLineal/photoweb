@@ -38,11 +38,11 @@ end
 # 'POST ''admin/collection_photos'
 def create
     
-  @photo = CollectionPhoto.new(photo_params)
+  photo = CollectionPhoto.new(photo_params)
   
-  @photo.save!
+  photo.save!
   
-  redirect_to admin_collection_photo(@photo)
+  redirect_to admin_collection_photo_path(photo)
   
 end
 
