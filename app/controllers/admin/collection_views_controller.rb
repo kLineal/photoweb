@@ -50,8 +50,7 @@ this_view = set_view
       if !this_view.collection_tags.exists?(tag.id)
        this_view.collection_tags<< tag
       end 
-    end
-    
+    end  
   end
   
   if params[:delete_tags_ids] 
@@ -67,18 +66,11 @@ this_view = set_view
       
     this_view.name = params[:collection_view][:name]
     this_view.view_type = params[:collection_view][:view_type]
-   
-    #if params[:view_type] 
-
-    #  this_view.view_type = params[:view_type] 
-    #end  
-
-    this_view.save!
     
+    this_view.save!  
   end
   
   redirect_to edit_admin_collection_view_path(this_view)
-  #render plain: params.inspect
 end
 
 # GET 'admin/collection_views/:id'
@@ -99,7 +91,6 @@ this_view = set_view
 this_view.destroy
 
 redirect_to admin_collection_views_path
-#render plain: "action to be implemented"
 end
 
 private
