@@ -77,16 +77,11 @@
        <br>
        <%= f.label :name  %>
         <%= f.text_field :name %>
-	<br><br>
-	
-	<%= f.label :view_type  %>
-        <%= f.text_field :view_type %>
 	<br>
-	<% @TYPES.each do |type| %>
-	  <%= radio_button_tag 'view_type', type %>
-	  <%=type %>
-	  <br>
-	<% end %>
+	<br>
+	<%= f.label 'Tipo de vista:' %>
+	<%= f.select :view_type, @TYPES %>
+	 
      </div>
    
      <div id="add_keywords">

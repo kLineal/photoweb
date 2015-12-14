@@ -62,22 +62,23 @@ this_view = set_view
     
   end
 
-  if params[:collection_view] # else sets the type of the view
+  if params[:collection_view] # last, set name and type:
     
       
-    this_view.name = params[:collection_view][:name]  
+    this_view.name = params[:collection_view][:name]
+    this_view.view_type = params[:collection_view][:view_type]
    
-    if params[:view_type] 
+    #if params[:view_type] 
 
-      this_view.view_type = params[:view_type] 
-    end  
+    #  this_view.view_type = params[:view_type] 
+    #end  
 
     this_view.save!
     
   end
   
   redirect_to edit_admin_collection_view_path(this_view)
- 
+  #render plain: params.inspect
 end
 
 # GET 'admin/collection_views/:id'
