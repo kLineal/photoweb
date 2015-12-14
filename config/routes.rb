@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   namespace :admin do
     
     root 'welcome#index'
+     
     resources :collection_photos do 
                  collection do
-                   get 'collection_photos/edit_batch' => 'collection_photos#edit_batch' 
-                   put 'collection_photos/edit_batch' => 'collection_photos#update_batch'  
+                   get 'archive' => 'collection_photos#index_archive' 
+                   get 'edit_batch' => 'collection_photos#edit_batch' 
+                   put 'edit_batch' => 'collection_photos#update_batch'  
                  end
               end
     resources :collection_views, :collection_tags

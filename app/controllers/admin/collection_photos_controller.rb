@@ -8,10 +8,16 @@ def new
 
 end
 
+def index
+
+  redirect_to archive_admin_collection_photos_path
+ 
+end
+
 # GET 'admin/collection_photos'
 #
 # index with filter capabilities
-def index
+def index_archive
   
   @all_collection_tags = CollectionTag.all
   @PROPERTIES = CollectionPhoto.properties
@@ -23,16 +29,17 @@ def index
   if params[:filter_by_keywords]
     @keywords_filter = params[:filter_by_keywords]
     photos_by_keywords = CollectionPhoto.tagged_with(@keywords_filter, :on => :keywords, :any => true)
-  else photos_by_keywords = CollectionPhoto.all 
+  else photos_by_keywords = CollectionPhoto.where(collection_type: 'archive') 
   end
   
   if params[:filter_by_properties]
     @properties_filter = params[:filter_by_properties]
     photos_by_properties = CollectionPhoto.tagged_with(@properties_filter, :on => :properties, :match_any => true)
-  else photos_by_properties = CollectionPhoto.all
+  else photos_by_properties = CollectionPhoto.where(collection_type: 'archive')
   end
   @photos = photos_by_keywords & photos_by_properties
-  
+  render "index"
+#render plain: params.inspect
 end
 
 
