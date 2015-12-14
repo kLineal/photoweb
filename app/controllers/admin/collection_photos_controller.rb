@@ -89,6 +89,7 @@ def edit_batch
   end
   
   @collection_tags = CollectionTag.all
+  @PROPERTIES = CollectionPhoto.properties
   
   # find join tags (so we can batch-delete them if wanted to)
   @join_keywords = CollectionPhoto.find_join_keywords_of(@batch)
@@ -112,6 +113,16 @@ def update_batch
       photos.each { |photo| photo.keyword_list.add(params[:keywords_to_append]) }
     end
     
+    #delete properties
+    if params[:properties_to_delete]
+      photos.each { |photo| photo.property_list.remove(params[:properties_to_delete]) }
+    end
+
+    #add properties
+    if params[:properties_to_append]
+       photos.each { |photo| photo.property_list.add(params[:properties_to_append]) }    
+    end
+
     # reload records
     photos.each do |photo|
       photo.save!
